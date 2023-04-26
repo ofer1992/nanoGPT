@@ -5,19 +5,20 @@ import os
 import pickle
 from contextlib import nullcontext
 import torch
-import tiktoken
+# import tiktoken
 from model import GPTConfig, GPT
 
 # -----------------------------------------------------------------------------
 init_from = 'resume' # either 'resume' (from an out_dir) or a gpt2 variant (e.g. 'gpt2-xl')
 out_dir = 'out' # ignored if init_from is not 'resume'
-start = "\n" # or "<|endoftext|>" or etc. Can also specify a file, use as: "FILE:prompt.txt"
-num_samples = 10 # number of samples to draw
-max_new_tokens = 500 # number of tokens generated in each sample
+start = "1." # or "<|endoftext|>" or etc. Can also specify a file, use as: "FILE:prompt.txt"
+start = "1. Nf3 c5 2. d4 cxd4 3. Nxd4 g6 4. c3 Bg7 5. Bg5 Qa5 6. Bd2 Qh5 7. e3 Nf6 8. Nf3 Qc5 9. Nd4 O-O 10. Be2 d6 11. Na3 Nc6 12. Ndb5 Qd5 13. Nd4 e6 14. Nxc6 Qxc6 15. O-O d5 16. Bb5 Qxb5 17. Nxb5 a6 18. Nd4 Bd7 19. b3 Bc6 20. Nxc6 bxc6 21. "
+num_samples = 1 # number of samples to draw
+max_new_tokens = 52 # number of tokens generated in each sample
 temperature = 0.8 # 1.0 = no change, < 1.0 = less random, > 1.0 = more random, in predictions
 top_k = 200 # retain only the top_k most likely tokens, clamp others to have 0 probability
 seed = 1337
-device = 'cuda' # examples: 'cpu', 'cuda', 'cuda:0', 'cuda:1', etc.
+device = 'cpu' # examples: 'cpu', 'cuda', 'cuda:0', 'cuda:1', etc.
 dtype = 'bfloat16' # 'float32' or 'bfloat16' or 'float16'
 compile = False # use PyTorch 2.0 to compile the model to be faster
 exec(open('configurator.py').read()) # overrides from command line or config file
